@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
         }else if(strPassword.isEmpty()){
             Toast.makeText(MainActivity.this, "Không được để trống Password", Toast.LENGTH_SHORT).show();
         }else{
-            if (strUsername.equals(LoginData.username) && strPassword.equals(LoginData.password)) {
-                if (!LoginData.PASSWORD_PATTERN.matcher(strPassword).matches()){
+            if (strUsername.equals(Data.username) && strPassword.equals(Data.password)) {
+                if (!Data.PASSWORD_PATTERN.matcher(strPassword).matches()){
                     Toast.makeText(this, "Password bao gồm 6~14 ký tự (bao gồm chữ hoa, chữ thường, chữ số, ký tự đặc biệt) và không bao gồm khoảng trắng ",
                             Toast.LENGTH_SHORT).show();
                 }else{
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
             } else {
                 Toast.makeText(this, "Sai Username hoặc Password", Toast.LENGTH_SHORT).show();
-                /*if (!LoginData.PASSWORD_PATTERN.matcher(strPassword).matches()) {
+                /*if (!Data.PASSWORD_PATTERN.matcher(strPassword).matches()) {
                     Toast.makeText(MainActivity.this,
                             "Sai Username hoặc Password\nPassword phải có ít nhất 6 ký tự: bao gồm chữ hoa, chữ thường, chữ số, ký tự đặc biệt ",
                             Toast.LENGTH_SHORT).show();

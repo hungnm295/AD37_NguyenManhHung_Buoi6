@@ -40,9 +40,7 @@ public class CreateNewNote extends AppCompatActivity {
     int hour, minute, day, month, year;
     ArrayList<Integer> tagsItem = new ArrayList<>();
     ArrayList<Integer> weeksItem = new ArrayList<>();
-    int selectedTune = 0;
-    int position = 0;
-    boolean[] checkOK;
+    int selectedTune = 0, position = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,15 +62,14 @@ public class CreateNewNote extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showDateDialog();
-
             }
         });
 
         tvTags.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String[] tagList = {"Family", "Game", "Android", "VTC", "Friend"};
-                final boolean[] checkList = {false, false, false, false, false};
+                final String[] tagList = Data.tagList;
+                final boolean[] checkList = new boolean[tagList.length];
                 AlertDialog alertDialog = new AlertDialog.Builder(CreateNewNote.this)
                         .setTitle("Choose tags")
                         .setCancelable(false)
@@ -86,6 +83,8 @@ public class CreateNewNote extends AppCompatActivity {
                                 } else if (tagsItem.contains(which)) {
                                     tagsItem.remove(Integer.valueOf(which));
                                 }
+
+                                //Sắp xếp thứ tự các mục đã chọn
                                 Collections.sort(tagsItem, new Comparator<Integer>() {
                                     @Override
                                     public int compare(Integer item1, Integer item2) {
@@ -94,7 +93,7 @@ public class CreateNewNote extends AppCompatActivity {
                                 });
                             }
                         })
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        .setPositiveButton(Data.POSITIVE_BUTTON, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String tags = "";
@@ -112,7 +111,7 @@ public class CreateNewNote extends AppCompatActivity {
                                 dialog.dismiss();
                             }
                         })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(Data.NEGATIVE_BUTTON, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
@@ -126,8 +125,8 @@ public class CreateNewNote extends AppCompatActivity {
         tvWeeks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String[] weekList = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
-                final boolean[] checkList = {false, false, false, false, false, false, false};
+                final String[] weekList = Data.weekList;
+                final boolean[] checkList = new boolean[weekList.length];
                 final AlertDialog.Builder alertDialog = new AlertDialog.Builder(CreateNewNote.this);
                 alertDialog.setTitle("Choose tags")
                         .setCancelable(false)
@@ -149,7 +148,7 @@ public class CreateNewNote extends AppCompatActivity {
                                 });
                             }
                         })
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        .setPositiveButton(Data.POSITIVE_BUTTON, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String weeks = "";
@@ -165,9 +164,10 @@ public class CreateNewNote extends AppCompatActivity {
                                     tvWeeks.setText(weeks);
                                 }
                                 dialog.dismiss();
+
                             }
                         })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(Data.NEGATIVE_BUTTON, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
@@ -351,8 +351,7 @@ public class CreateNewNote extends AppCompatActivity {
 
     public void showDefaultTune() {
 
-        final String[] tunes = {"Nexus Tune", "WindowPhone Tune",
-                "Pep Tune", "Nokia Tune", "Other"};
+        final String[] tunes = Data.tunes;
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(CreateNewNote.this);
         alertDialog.setTitle("Set tune:")
                 .setCancelable(false)
@@ -362,7 +361,7 @@ public class CreateNewNote extends AppCompatActivity {
                         selectedTune = which;
                     }
                 })
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                .setPositiveButton(Data.POSITIVE_BUTTON, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         position = selectedTune;
@@ -375,7 +374,7 @@ public class CreateNewNote extends AppCompatActivity {
                         });
                     }
                 })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton(Data.NEGATIVE_BUTTON, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
