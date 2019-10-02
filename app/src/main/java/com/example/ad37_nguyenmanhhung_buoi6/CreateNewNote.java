@@ -69,7 +69,7 @@ public class CreateNewNote extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final String[] tagList = Data.tagList;
-                final boolean[] checkList = new boolean[tagList.length];
+                boolean[] checkList = new boolean[tagList.length];
                 AlertDialog alertDialog = new AlertDialog.Builder(CreateNewNote.this)
                         .setTitle("Choose tags")
                         .setCancelable(false)
@@ -126,7 +126,7 @@ public class CreateNewNote extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final String[] weekList = Data.weekList;
-                final boolean[] checkList = new boolean[weekList.length];
+                boolean[] checkList = new boolean[weekList.length];
                 final AlertDialog.Builder alertDialog = new AlertDialog.Builder(CreateNewNote.this);
                 alertDialog.setTitle("Choose tags")
                         .setCancelable(false)
@@ -136,6 +136,7 @@ public class CreateNewNote extends AppCompatActivity {
                                 if (isChecked) {
                                     if (!weeksItem.contains(which)) {
                                         weeksItem.add(which);
+
                                     }
                                 } else if (weeksItem.contains(which)) {
                                     weeksItem.remove(Integer.valueOf(which));
@@ -163,7 +164,6 @@ public class CreateNewNote extends AppCompatActivity {
                                 } else {
                                     tvWeeks.setText(weeks);
                                 }
-                                dialog.dismiss();
 
                             }
                         })
